@@ -23,6 +23,8 @@ import {BadgeModule} from 'primeng/badge';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TooltipModule} from 'primeng/tooltip';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {FieldsetModule} from 'primeng/fieldset';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   imports: [
@@ -46,7 +48,9 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     BadgeModule,
     ToolbarModule,
     TooltipModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    FieldsetModule,
+    CalendarModule
     ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ]

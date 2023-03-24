@@ -73,7 +73,16 @@
             <p-skeleton height="10rem" animation="none" styleClass="surface-400"></p-skeleton>
         </div>
         <div *ngIf="selectedTab=='1'">
-            <p-skeleton height="15rem" animation="none" styleClass="surface-400"></p-skeleton>
+            <p-fieldset legend="Delta C Follow Sheet - Tracking Information">
+                <div class="field">
+                    <label for="input1" class="mr-3">Completed By:</label>
+                    <input name="input1" type="text" pInputText> 
+                </div>
+                <div class="field">
+                    <label for="date1" class="mr-3">Date:</label>
+                    <p-calendar name="date1" [showIcon]="true" inputId="icon" autoZIndex="false" style="z-index:100"></p-calendar>
+                </div>
+            </p-fieldset>
         </div>
         <div *ngIf="selectedTab=='2'">
             <p-skeleton height="20rem" animation="none" styleClass="surface-400"></p-skeleton>

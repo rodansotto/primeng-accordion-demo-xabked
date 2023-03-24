@@ -46,7 +46,7 @@ export class AppComponent {
       { name: 'Root Causes', index: 5, disabled: false, status: 0 },
       { name: 'Containment', index: 6, disabled: false, status: 0 },
     ];
-    this.selectedTab = 0;
+    this.selectedTab = 1;
 
     this.aa_q1_options = [{label: 'No (Work related problem)', value: 'no'}, {label: 'Yes (Troubleshooting related problem)', value: 'yes'}];
 
