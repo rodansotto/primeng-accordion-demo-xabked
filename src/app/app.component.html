@@ -1,0 +1,261 @@
+<p-panel header="ICS Defect Details">
+    <div class="grid ml-1">
+        <div class="col-3 p-0">VIN: 2T2BBMCA7PC001642</div>
+        <div class="col-6 p-0">Reg #: 32591854</div>
+        <div class="col-3 p-0">Delta: -</div>
+        <div class="col-3 p-0">Body: 05060</div>
+        <div class="col-6 p-0">Insp Team: A</div>
+        <div class="col-3 p-0">Water Leak: N</div>
+        <div class="col-3 p-0">Seq Num: 947</div>
+        <div class="col-6 p-0">Date Found: 2022-12-01 12:34:15</div>
+        <div class="col-3 p-0">Specification: N</div>
+        <div class="col-3 p-0">Status: OPEN</div>
+        <div class="col-6 p-0">Responsibility: ASSY SOUTH/CHASSIS2/...</div>
+        <div class="col-3 p-0">Designation: FUNC</div>
+        <div class="col-3 p-0"></div>
+        <div class="col-6 p-0">Defect: REAR FLOOR UNDERBODY/GROMMET/MISSING</div>
+        <div class="col-3 p-0">Rank: B</div>
+    </div>
+</p-panel>
+<div class="mt-3 mb-5">
+<p-inplace>
+<ng-template pTemplate="display">
+    <div class="inline-flex align-items-center">
+        <span class="pi pi-image" style="vertical-align: middle"></span>
+        <span class="ml-2">View Defect Image</span>
+    </div>
+</ng-template>
+<ng-template pTemplate="content">
+    <img src="https://tse2.mm.bing.net/th/id/OIP.2-1nyMV0uS5OJ3UfWi1CqgAAAA?pid=ImgDet&rs=1" alt="Defect Image">
+</ng-template>
+</p-inplace>
+</div>
+<p-toolbar>
+<div class="text-lg font-medium">Problem Follow Sheet</div>
+<div class="p-toolbar-group-right">
+<p-button icon="pi pi-save" styleClass="bg-yellow-400 border-yellow-400" pTooltip="Save" tooltipPosition="left"></p-button>
+<p-button icon="pi pi-send"disabled="true" class="ml-1" styleClass="bg-green-500 border-green-500" pTooltip="Submit" tooltipPosition="left"></p-button>
+<p-button icon="pi pi-sync" class="ml-1" styleClass="bg-green-500 border-green-500" pTooltip="Re-Open" tooltipPosition="left"></p-button>
+<p-button icon="pi pi-check-square" class="ml-1" styleClass="bg-gray-900 border-gray-900" pTooltip="Check" tooltipPosition="left"></p-button>
+<p-button icon="pi pi-thumbs-up" class="ml-1" styleClass="bg-purple-500 border-purple-500" pTooltip="Approve" tooltipPosition="left"></p-button>
+</div>
+</p-toolbar>
+<div class="flex flex-row mt-2" style="height:35rem">
+<div class="w-20rem mr-3">
+<p-listbox [(ngModel)]="selectedTab" [options]="tabs" optionLabel="name" optionValue="index" optionDisabled="disabled" (click)="tabClicked()">
+    <ng-template let-tab pTemplate="item">
+        <div>{{tab.name}}</div>
+        <div *ngIf="tab.status==1" class="pi pi-exclamation-triangle ml-auto" [ngStyle]="{fontSize:'1.5rem',color:'var(--yellow-400)'}"></div>
+        <div *ngIf="tab.status==2" class="pi pi-check ml-auto" [ngStyle]="{fontSize:'1.5rem',color:'var(--green-500)'}"></div>
+    </ng-template>
+</p-listbox>
+<div class="mt-1">
+<p-listbox [(ngModel)]="selectedOptionalTab" [options]="optionalTabs" optionLabel="name" optionValue="index" optionDisabled="disabled" (click)="optionalTabClicked()">
+<ng-template let-tab pTemplate="item">
+    <div>{{tab.name}}</div>
+    <p-badge class="ml-auto" [value]="2"></p-badge>
+</ng-template>
+</p-listbox>
+</div>
+<!-- <div class="mt-3">
+<p-button icon="pi pi-comment" class="mt-3 mr-1"></p-button>
+<p-button icon="pi pi-save" class="mt-3 mr-1"></p-button>
+<p-button icon="pi pi-send" class="mt-3 mr-1" disabled="true"></p-button>
+</div> -->
+<!-- <button pButton type="button" label="Save" class="mt-3 mr-1"></button>
+<button pButton type="button" label="Submit..." class="mt-1" disabled="true"></button> -->
+</div>
+<div class="w-full">
+    <p-panel header="{{tabs[selectedTab].name}}">
+        <p-scrollPanel [style]="{width: '100%', height: '400px'}" styleClass="custombar1">
+
+        <div *ngIf="selectedTab=='0'">
+            <p-skeleton height="10rem" animation="none" styleClass="surface-400"></p-skeleton>
+        </div>
+        <div *ngIf="selectedTab=='1'">
+            <p-skeleton height="15rem" animation="none" styleClass="surface-400"></p-skeleton>
+        </div>
+        <div *ngIf="selectedTab=='2'">
+            <p-skeleton height="20rem" animation="none" styleClass="surface-400"></p-skeleton>
+        </div>
+        <div *ngIf="selectedTab=='3'">
+            <p-skeleton height="10rem" animation="none" styleClass="surface-400"></p-skeleton>
+        </div>
+
+        <div *ngIf="selectedTab=='4'">
+        <div class="flex flex-column gap-3 pb-3">
+
+        <div>
+        <h5 class="pBadge">Did the T/M notice any abnormality?<span class="ml-1 text-red-500">*</span></h5>
+        <!-- <div class="formgroup-inline">
+            <div class="field-radiobutton">
+                <input type="radio" id="aa1no" name="aa1noyes">
+                <label for="aa1no">	No (Work related problem)</label>
+            </div>
+            <div class="field-radiobutton">
+                <input type="radio" id="aa1yes" name="aa1noyes">
+                <label for="aa1yes">Yes (Troubleshooting related problem)</label>
+            </div>
+        </div> -->
+        <p-selectButton [options]="aa_q1_options" [(ngModel)]="aa_q1_value" optionLabel="label" optionValue="value"></p-selectButton>
+        </div>
+
+        <div *ngIf="aa_q1_value=='no'">
+        <h5>What do you think are the problems that are related to work?<span class="ml-1 text-red-500">*</span></h5>
+        <div class="field-checkbox">
+            <p-checkbox name="aa_q1no1" value="1" [(ngModel)]="aa_q1no1_values" inputId="aa_q1no1_v1"></p-checkbox>
+            <label for="aa_q1no1_v1">T/M did not notice defect condition</label>
+        </div>
+        <div class="field-checkbox">
+            <p-checkbox name="aa_q1no1" value="2" [(ngModel)]="aa_q1no1_values" inputId="aa_q1no1_v2"></p-checkbox>
+            <label for="aa_q1no1_v2">T/M did not follow Standardized work</label>
+        </div>
+        <textarea *ngIf="aa_q1no1_values.includes('2')" class="ml-5 mb-3" rows="3" cols="70" pInputTextarea autoResize="autoResize"></textarea>
+        <div class="field-checkbox">
+            <p-checkbox name="aa_q1no1" value="3" [(ngModel)]="aa_q1no1_values" inputId="aa_q1no1_v3"></p-checkbox>
+            <label for="aa_q1no1_v3">T/M did follow Standardized work</label>
+        </div>
+        <div class="field-checkbox">
+            <p-checkbox name="aa_q1no1" value="4" [(ngModel)]="aa_q1no1_values" inputId="aa_q1no1_v4"></p-checkbox>
+            <label for="aa_q1no1_v4">Other</label>
+        </div>
+        <div *ngIf="aa_q1no1_values.includes('4')" class="flex ml-5 mb-3" >
+        <textarea rows="3" cols="70" pInputTextarea autoResize="autoResize"></textarea>
+        <div class="ml-1 text-red-500">*</div>
+        </div>
+        </div>
+
+        <div class="flex flex-column gap-2" *ngIf="aa_q1_value=='yes'">
+        <div>
+        <h5>What kind of abnormality occurred?<span class="ml-1 text-red-500">*</span></h5>
+        <div class="field-checkbox">
+            <p-checkbox name="aa_q1yes1" value="1" [(ngModel)]="aa_q1yes1_values" inputId="aa_q1yes1_v1"></p-checkbox>
+            <label for="aa_q1yes1_v1">Abnormality in Assembling</label>
+        </div>
+        <div class="field-checkbox">
+            <p-checkbox name="aa_q1yes1" value="2" [(ngModel)]="aa_q1yes1_values" inputId="aa_q1yes1_v2"></p-checkbox>
+            <label for="aa_q1yes1_v2">Abnormality in Equipment</label>
+        </div>
+        <div class="field-checkbox">
+            <p-checkbox name="aa_q1yes1" value="3" [(ngModel)]="aa_q1yes1_values" inputId="aa_q1yes1_v3"></p-checkbox>
+            <label for="aa_q1yes1_v3">Other</label>
+        </div>
+        <div *ngIf="aa_q1yes1_values.includes('3')" class="flex ml-5" >
+        <textarea rows="3" cols="70" pInputTextarea autoResize="autoResize"></textarea>        
+        <div class="ml-1 text-red-500">*</div>
+        </div>
+        </div>
+
+        <div>
+        <h5>Is there any record of corrective action or troubleshooting taken?<span class="ml-1 text-red-500">*</span></h5>
+        <div class="flex gap-3">
+        <!-- <p-radioButton label="No" name="groupname" value="no" [(ngModel)]="selectedValue"></p-radioButton>
+        <p-radioButton label="Yes" name="groupname" value="yes" [(ngModel)]="selectedValue"></p-radioButton> -->
+        <p-selectButton [options]="no_yes_options" [(ngModel)]="aa_q1yes2_value" optionLabel="label" optionValue="value"></p-selectButton>
+        </div>
+        </div>
+
+        <div>
+        <h5>What went wrong with troubleshooting?<span class="ml-1 text-red-500">*</span></h5>
+        <p-selectButton [options]="aa_q1yes3_options" [(ngModel)]="aa_q1yes3_value" optionLabel="label" optionValue="value"></p-selectButton>
+
+        <div class="mt-3" *ngIf="aa_q1yes3_value=='1'">
+            <h5>Select at least 1 option:<span class="ml-1 text-red-500">*</span></h5>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v1" value="1" [(ngModel)]="aa_q1yes3v1_values" inputId="aa_q1yes3v1_v1"></p-checkbox>
+                <label for="aa_q1yes3v1_v1">T/M noticed abnormality but did not think it was a problem</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v1" value="2" [(ngModel)]="aa_q1yes3v1_values" inputId="aa_q1yes3v1_v2"></p-checkbox>
+                <label for="aa_q1yes3v1_v2">T/M noticed abnormality but did not report it</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v1" value="3" [(ngModel)]="aa_q1yes3v1_values" inputId="aa_q1yes3v1_v3"></p-checkbox>
+                <label for="aa_q1yes3v1_v3">	T/M noticed abnormality but forgot to report it</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v1" value="4" [(ngModel)]="aa_q1yes3v1_values" inputId="aa_q1yes3v1_v4"></p-checkbox>
+                <label for="aa_q1yes3v1_v4">T/M tried to report abnormality but left it because nobody came to the line</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v1" value="5" [(ngModel)]="aa_q1yes3v1_values" inputId="aa_q1yes3v1_v5"></p-checkbox>
+                <label for="aa_q1yes3v1_v5">T/M performed troubleshooting by him / herself</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v1" value="6" [(ngModel)]="aa_q1yes3v1_values" inputId="aa_q1yes3v1_v6"></p-checkbox>
+                <label for="aa_q1yes3v1_v6">Other</label>
+            </div>
+            <div *ngIf="aa_q1yes3v1_values.includes('6')" class="flex ml-5">
+            <textarea rows="3" cols="70" pInputTextarea autoResize="autoResize"></textarea>        
+            <div class="ml-1 text-red-500">*</div>
+            </div>
+        </div>
+
+        <div class="mt-3" *ngIf="aa_q1yes3_value=='2'">
+            <h5>Select at least 1 option:<span class="ml-1 text-red-500">*</span></h5>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v2" value="1" [(ngModel)]="aa_q1yes3v2_values" inputId="aa_q1yes3v2_v1"></p-checkbox>
+                <label for="aa_q1yes3v2_v1">Troubleshooter forgot to troubleshoot abnormality</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v2" value="2" [(ngModel)]="aa_q1yes3v2_values" inputId="aa_q1yes3v2_v2"></p-checkbox>
+                <label for="aa_q1yes3v2_v2">Troubleshooter took corrective action but did not troubleshoot completely</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v2" value="3" [(ngModel)]="aa_q1yes3v2_values" inputId="aa_q1yes3v2_v3"></p-checkbox>
+                <label for="aa_q1yes3v2_v3">Other</label>
+            </div>
+            <div *ngIf="aa_q1yes3v2_values.includes('3')" class="flex ml-5">
+            <textarea rows="3" cols="70" pInputTextarea autoResize="autoResize"></textarea>        
+            <div class="ml-1 text-red-500">*</div>
+            </div>
+        </div>
+
+        <div class="mt-3" *ngIf="aa_q1yes3_value=='3'">
+            <h5>Select at least 1 option:<span class="ml-1 text-red-500">*</span></h5>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v3" value="1" [(ngModel)]="aa_q1yes3v3_values" inputId="aa_q1yes3v3_v1"></p-checkbox>
+                <label for="aa_q1yes3v3_v1">Information on abnormality was not communicated well</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v3" value="2" [(ngModel)]="aa_q1yes3v3_values" inputId="aa_q1yes3v3_v2"></p-checkbox>
+                <label for="aa_q1yes3v3_v2">Wrong information on abnormality was communicated</label>
+            </div>
+            <div class="field-checkbox">
+                <p-checkbox name="aa_q1yes3v3" value="3" [(ngModel)]="aa_q1yes3v3_values" inputId="aa_q1yes3v3_v3"></p-checkbox>
+                <label for="aa_q1yes3v3_v3">Other</label>
+            </div>
+            <div *ngIf="aa_q1yes3v3_values.includes('3')" class="flex ml-5">
+            <textarea rows="3" cols="70" pInputTextarea autoResize="autoResize"></textarea>        
+            <div class="ml-1 text-red-500">*</div>
+            </div>
+        </div>
+
+        </div>
+
+        </div>
+
+        </div>
+    </div>
+
+
+        <div *ngIf="selectedTab=='5'">
+            <p-skeleton height="30rem" animation="none" styleClass="surface-400"></p-skeleton>
+        </div>
+        <div *ngIf="selectedTab=='6'">
+            <p-skeleton height="5rem" animation="none" styleClass="surface-400"></p-skeleton>
+        </div>
+
+        </p-scrollPanel>
+
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-angle-left" class="mt-3 mr-1" [disabled]="selectedTab=='0'" (click)="previousTab()"></p-button>
+            <p-button icon="pi pi-angle-right" class="mt-3 mr-1" [disabled]="selectedTab=='6'" (click)="nextTab()"></p-button>
+        </ng-template>
+    </p-panel>
+
+    <p-panel header="Comments" *ngIf="selectedOptionalTab=='0'">
+        <p-skeleton height="5rem" animation="none" styleClass="surface-400"></p-skeleton>
+    </p-panel>
+    </div>
+</div>
