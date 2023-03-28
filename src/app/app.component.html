@@ -45,8 +45,8 @@
 <p-listbox [(ngModel)]="selectedTab" [options]="tabs" optionLabel="name" optionValue="index" optionDisabled="disabled" (click)="tabClicked()">
     <ng-template let-tab pTemplate="item">
         <div>{{tab.name}}</div>
-        <div *ngIf="tab.status==1" class="pi pi-exclamation-triangle ml-auto" [ngStyle]="{fontSize:'1.5rem',color:'var(--yellow-400)'}"></div>
-        <div *ngIf="tab.status==2" class="pi pi-check ml-auto" [ngStyle]="{fontSize:'1.5rem',color:'var(--green-500)'}"></div>
+        <div *ngIf="tab.status==1" class="pi pi-exclamation-triangle ml-auto" [ngStyle]="{fontSize:'1.25rem',color:'var(--yellow-400)'}"></div>
+        <div *ngIf="tab.status==2" class="pi pi-check ml-auto" [ngStyle]="{fontSize:'1.25rem',color:'var(--green-500)'}"></div>
     </ng-template>
 </p-listbox>
 <div class="mt-1">
@@ -73,16 +73,58 @@
             <p-skeleton height="10rem" animation="none" styleClass="surface-400"></p-skeleton>
         </div>
         <div *ngIf="selectedTab=='1'">
-            <p-fieldset legend="Delta C Follow Sheet - Tracking Information">
-                <div class="field">
+            <p-fieldset legend="Tracking Information" styleClass="customlegend">
+                <div class="grid gap-5">
+                <div>
                     <label for="input1" class="mr-3">Completed By:</label>
-                    <input name="input1" type="text" pInputText> 
+                    <input name="input1" type="text" pInputText>
                 </div>
-                <div class="field">
+                <div>
                     <label for="date1" class="mr-3">Date:</label>
-                    <p-calendar name="date1" [showIcon]="true" inputId="icon" autoZIndex="false" style="z-index:100"></p-calendar>
+                    <p-calendar name="date1" [showIcon]="true" inputId="icon" appendTo="body"></p-calendar>
+                </div>
                 </div>
             </p-fieldset>
+            <div class="mt-3">
+                <h5>Recurrence Issue?</h5>
+                <p-selectButton [options]="no_yes_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Build Team:<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="d_team_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Shift:<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="d_shift_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Day:<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="d_day_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Quarter:<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="d_qtr_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Timing:<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="d_timing_optons" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Team Member Status:<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="d_status_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>T/M Experience on this Process and GPC Training?<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="d_q1_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Safety Quality Audit Completed on T/M?<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="no_yes_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
+            <div class="mt-3">
+                <h5>Have you (G/L) seen the defect?<span class="ml-1 text-red-500">*</span></h5>
+                <p-selectButton [options]="no_yes_options" optionLabel="label" optionValue="value" class="align-self-center"></p-selectButton>
+            </div>
         </div>
         <div *ngIf="selectedTab=='2'">
             <p-skeleton height="20rem" animation="none" styleClass="surface-400"></p-skeleton>
@@ -94,8 +136,8 @@
         <div *ngIf="selectedTab=='4'">
         <div class="flex flex-column gap-3 pb-3">
 
-        <div>
-        <h5 class="pBadge">Did the T/M notice any abnormality?<span class="ml-1 text-red-500">*</span></h5>
+        <div class="ml-1">
+        <h5>Did the T/M notice any abnormality?<span class="ml-1 text-red-500">*</span></h5>
         <!-- <div class="formgroup-inline">
             <div class="field-radiobutton">
                 <input type="radio" id="aa1no" name="aa1noyes">
@@ -109,7 +151,7 @@
         <p-selectButton [options]="aa_q1_options" [(ngModel)]="aa_q1_value" optionLabel="label" optionValue="value"></p-selectButton>
         </div>
 
-        <div *ngIf="aa_q1_value=='no'">
+        <div class="ml-1" *ngIf="aa_q1_value=='no'">
         <h5>What do you think are the problems that are related to work?<span class="ml-1 text-red-500">*</span></h5>
         <div class="field-checkbox">
             <p-checkbox name="aa_q1no1" value="1" [(ngModel)]="aa_q1no1_values" inputId="aa_q1no1_v1"></p-checkbox>
@@ -134,7 +176,7 @@
         </div>
         </div>
 
-        <div class="flex flex-column gap-2" *ngIf="aa_q1_value=='yes'">
+        <div class="ml-1" *ngIf="aa_q1_value=='yes'">
         <div>
         <h5>What kind of abnormality occurred?<span class="ml-1 text-red-500">*</span></h5>
         <div class="field-checkbox">

@@ -23,6 +23,18 @@ export class AppComponent {
   selectedTab: number;
   selectedOptionalTab: number;
 
+  no_yes_options: any[];
+
+  d_team_options: any[];
+  d_shift_options: any[];
+  d_day_options: any[];
+  d_qtr_options: any[];
+  d_timing_optons: any[];
+  d_status_options: any[];
+  d_q1_options: any[];
+  d_q2_options: any[];
+  d_q3_options: any[];
+
   aa_q1_options: any[];
   aa_q1_value: string;
   aa_q1no1_values: any[] = [];
@@ -34,7 +46,6 @@ export class AppComponent {
   aa_q1yes3v2_values: any[] = [];
   aa_q1yes3v3_values: any[] = [];
 
-  no_yes_options: any[];
 
   constructor(private messageService: MessageService) {
     this.tabs = [
@@ -47,6 +58,14 @@ export class AppComponent {
       { name: 'Containment', index: 6, disabled: false, status: 0 },
     ];
     this.selectedTab = 1;
+
+    this.d_team_options = [{label: 'A Team', value: 'a'}, {label: 'B Team', value: 'b'}];
+    this.d_shift_options = [{label: 'Day Shift', value: 'd'}, {label: 'Night Shift', value: 'n'}];
+    this.d_day_options = [{label: 'Monday', value: 'mon'}, {label: 'Tuesday', value: 'tue'}, {label: 'Wednesday', value: 'wed'}, {label: 'Thursday', value: 'thu'}, {label: 'Friday', value: 'fri'}, {label: 'Saturday', value: 'sat'}, {label: 'Sunday', value: 'sun'}];
+    this.d_qtr_options = [{label: 'Q1', value: 'q1'}, {label: 'Q2', value: 'q2'}, {label: 'Q3', value: 'q3'}, {label: 'Q4', value: 'q4'}, {label: 'OT', value: 'ot'}];
+    this.d_timing_optons = [{label: '5 min Pre Break / EOS', value: '1'}, {label: '5 min Post Break / SOS', value: '2'}, {label: '	Not Applicable', value: '3'}];
+    this.d_status_options = [{label: 'Reg T/M', value: '1'}, {label: 'New T/M in Training', value: '2'}, {label: 'Reg T/M Rotation Training', value: '3'}, {label: 'T/L', value: '4'}, {label: 'Other:', value: '5'}];
+    this.d_q1_options = [{label: '< 3 months, no GPC training', value: '1'}, {label: '> 3 months, no GPC training', value: '2'}, {label: '< 3 months, with GPC training', value: '3'}, {label: '> 3 months, with GPC training', value: '4'}];
 
     this.aa_q1_options = [{label: 'No (Work related problem)', value: 'no'}, {label: 'Yes (Troubleshooting related problem)', value: 'yes'}];
 
